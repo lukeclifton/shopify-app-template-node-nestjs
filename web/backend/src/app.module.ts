@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { ShopifyCoreModule } from '@nestjs-shopify/core'
+import { ShopifyCoreModule, ShopifyCspMiddleware } from '@nestjs-shopify/core'
 import { ApiVersion } from '@shopify/shopify-api'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 
@@ -25,4 +25,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(ShopifyCspMiddleware).forRoutes('*')
+  }
+}
