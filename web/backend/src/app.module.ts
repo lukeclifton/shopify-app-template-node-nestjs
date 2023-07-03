@@ -7,6 +7,7 @@ import { ShopifyAuthModule } from '@nestjs-shopify/auth'
 import { AfterAuthHandler } from './shopify/auth/auth-handlers/after-auth.handler'
 import { ShopifyWebhooksModule } from '@nestjs-shopify/webhooks'
 import { AppUninstalledWebhookHandler } from './shopify/webhooks/app-uninstalled.webhook-handler'
+import { PostgreSQLSessionStorage } from '@shopify/shopify-app-session-storage-postgresql'
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { AppUninstalledWebhookHandler } from './shopify/webhooks/app-uninstalled
           scopes: configService.get('SHOPIFY_SCOPES').split(','),
         }
       },
-      inject: [ConfigService],
+      inject: [ConfigService, PostgreSQLSessionStorage],
     }),
     ShopifyWebhooksModule.forRoot({
       path: '/shopify/webhooks',
