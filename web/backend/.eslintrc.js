@@ -17,10 +17,6 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
-    'indent': [
-      'error',
-      2
-    ],
     'quotes': [
       'error',
       'single'

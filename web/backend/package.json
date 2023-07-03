@@ -21,8 +21,10 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs-shopify/auth": "^4.0.0",
     "@nestjs-shopify/core": "^3.1.0",
     "@nestjs-shopify/graphql": "^4.0.0",
+    "@nestjs-shopify/webhooks": "^3.0.0",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^8.0.0",
