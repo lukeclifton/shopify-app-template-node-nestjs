@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { AfterAuthHandler } from './after-auth.handler';
+import { Module } from '@nestjs/common'
+import { AfterAuthHandler } from './after-auth.handler'
 
 @Module({
   providers: [AfterAuthHandler],
