@@ -9,10 +9,14 @@
     "dev": "shopify app dev",
     "info": "shopify app info",
     "generate": "shopify app generate",
-    "deploy": "shopify app deploy"
+    "deploy": "shopify app deploy",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@shopify/app": "^3.0.0",
     "@shopify/cli": "^3.0.0"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3"
   }
 }
