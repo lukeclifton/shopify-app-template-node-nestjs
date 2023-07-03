@@ -8,11 +8,13 @@ import { AfterAuthHandler } from './shopify/auth/auth-handlers/after-auth.handle
 import { ShopifyWebhooksModule } from '@nestjs-shopify/webhooks'
 import { AppUninstalledWebhookHandler } from './shopify/webhooks/app-uninstalled.webhook-handler'
 import { PostgreSQLSessionStorage } from '@shopify/shopify-app-session-storage-postgresql'
+import { AuthHandlerModule } from './shopify/auth/auth-handlers/auth-handers.module'
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     ShopifyCoreModule.forRootAsync({
+      imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         apiKey: configService.get('SHOPIFY_API_KEY'),
         apiSecretKey: configService.get('SHOPIFY_API_SECRET'),
@@ -21,15 +23,16 @@ import { PostgreSQLSessionStorage } from '@shopify/shopify-app-session-storage-p
         isEmbeddedApp: true,
         scopes: configService.get('SHOPIFY_SCOPES').split(','),
         sessionStorage: new PostgreSQLSessionStorage(
-          configService.get('DATABSE_URL'),
+          configService.get('DATABASE_URL'),
         ),
       }),
-      inject: [ConfigService, PostgreSQLSessionStorage],
+      inject: [ConfigService],
     }),
     ShopifyWebhooksModule.forRoot({
       path: '/shopify/webhooks',
     }),
     ShopifyAuthModule.forRootAsyncOnline({
+      imports: [AuthHandlerModule],
       useFactory: (afterAuthHandler: AfterAuthHandler) => ({
         basePath: 'user',
         afterAuthHandler,
@@ -37,6 +40,7 @@ import { PostgreSQLSessionStorage } from '@shopify/shopify-app-session-storage-p
       inject: [AfterAuthHandler],
     }),
     ShopifyAuthModule.forRootAsyncOffline({
+      imports: [AuthHandlerModule],
       useFactory: (afterAuthHandler: AfterAuthHandler) => ({
         basePath: 'shop',
         afterAuthHandler,
@@ -45,7 +49,7 @@ import { PostgreSQLSessionStorage } from '@shopify/shopify-app-session-storage-p
     }),
     ShopifyGraphqlProxyModule,
   ],
-  providers: [AfterAuthHandler, AppUninstalledWebhookHandler],
+  providers: [AppUninstalledWebhookHandler],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

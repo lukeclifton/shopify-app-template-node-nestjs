@@ -1,13 +1,16 @@
 import { Request, Response } from 'express'
 import { ShopifyAuthAfterHandler } from '@nestjs-shopify/auth'
 import { ShopifyWebhooksService } from '@nestjs-shopify/webhooks'
-import { Injectable, Logger } from '@nestjs/common'
-import { Session, Shopify } from '@shopify/shopify-api'
+import { Inject, Injectable, Logger } from '@nestjs/common'
+import { Session } from '@shopify/shopify-api'
+import { InjectShopify } from '@nestjs-shopify/core'
+import { Shopify } from '@shopify/shopify-api'
 
 @Injectable()
 export class AfterAuthHandler implements ShopifyAuthAfterHandler {
   constructor(
     private readonly webhooksService: ShopifyWebhooksService,
+    @InjectShopify()
     private readonly shopifyApi: Shopify,
   ) {}
 

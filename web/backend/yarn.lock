@@ -828,6 +828,13 @@
     pg-connection-string "^2.5.0"
     tslib "^2.4.0"
 
+"@shopify/shopify-app-session-storage@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@shopify/shopify-app-session-storage/-/shopify-app-session-storage-1.1.4.tgz#fa93ebc38acff7bceb368b9af4447405aa7abdd4"
+  integrity sha512-8BgxZGK750pwvN3HEK9nq9uUjYpPtb2HnZaX/P0GBaMyLZbPmv+gyPLd8/AJq7d9hWeL3R/83V6YGqHh5QS90Q==
+  dependencies:
+    tslib "^2.4.0"
+
 "@sinonjs/commons@^1.7.0":
   version "1.8.6"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.6.tgz#80c516a4dc264c2a69115e7578d62581ff455ed9"

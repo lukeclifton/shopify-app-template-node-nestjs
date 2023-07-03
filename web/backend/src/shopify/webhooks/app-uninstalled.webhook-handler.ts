@@ -1,4 +1,5 @@
 import { ShopifyWebhookHandler, WebhookHandler } from '@nestjs-shopify/webhooks'
+import { ShopifyWebhookTopic } from './enums'
 
 @WebhookHandler(ShopifyWebhookTopic.AppUninstalled)
 export class AppUninstalledWebhookHandler extends ShopifyWebhookHandler {
