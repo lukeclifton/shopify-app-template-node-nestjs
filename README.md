@@ -1,6 +1,6 @@
-# Shopify App Template - Node
+# Shopify App Template - Node / NestJS
 
-This is a template for building a [Shopify app](https://shopify.dev/docs/apps/getting-started) using Node and React. It contains the basics for building a Shopify app.
+This is a template for building a [Shopify app](https://shopify.dev/docs/apps/getting-started) using Node, [NestJS](https://nestjs.com) and [React](https://react.dev). It contains the basics for building a Shopify app.
 
 Rather than cloning this repo, you can use your preferred package manager and the Shopify CLI with [these steps](#installing-the-template).
 
@@ -22,7 +22,7 @@ The Node app template comes with the following out-of-the-box functionality:
 
 This template combines a number of third party open-source tools:
 
-- [Express](https://expressjs.com/) builds the backend.
+- [NestJS](https://nestjs.com) builds the backend.
 - [Vite](https://vitejs.dev/) builds the [React](https://reactjs.org/) frontend.
 - [React Router](https://reactrouter.com/) is used for routing. We wrap this with file-based routing.
 - [React Query](https://react-query.tanstack.com/) queries the Admin API.
