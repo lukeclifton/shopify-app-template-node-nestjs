@@ -1,6 +1,4 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
 import { ShopifyCoreModule, ShopifyCspMiddleware } from '@nestjs-shopify/core'
 import { ApiVersion } from '@shopify/shopify-api'
 import { ConfigModule, ConfigService } from '@nestjs/config'
@@ -45,8 +43,7 @@ import { AppUninstalledWebhookHandler } from './shopify/webhooks/app-uninstalled
     }),
     ShopifyGraphqlProxyModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, AfterAuthHandler, AppUninstalledWebhookHandler],
+  providers: [AfterAuthHandler, AppUninstalledWebhookHandler],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
