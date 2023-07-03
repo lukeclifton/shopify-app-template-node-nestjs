@@ -663,6 +663,11 @@
   resolved "https://registry.yarnpkg.com/@nestjs-shopify/core/-/core-3.1.0.tgz#38bfd0fb0f9aa68df62dfaa2c8d4fbf100abd65b"
   integrity sha512-EaOydCx4HTdBiGG8U+NbjjojMR0bzP2PgKfjPW8oWKoTNLTTwa4eiPgc6gkRIxMl4Oco8bPmIly4DyupiFw8mA==
 
+"@nestjs-shopify/graphql@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@nestjs-shopify/graphql/-/graphql-4.0.0.tgz#2462c284c3c6e08d22cfd284a69b19f23f21c24a"
+  integrity sha512-mjQJbq2ICsuHFicZ6Mx5+p4Zy68HSh+aRHf7aex5TjR7xZhiCxpIA0Ir8GhAu6imRBPpQ5if6aZ3zv2aHNJINg==
+
 "@nestjs/cli@^8.0.0":
   version "8.2.8"
   resolved "https://registry.yarnpkg.com/@nestjs/cli/-/cli-8.2.8.tgz#63e5b477f90e6d0238365dcc6236b95bf4f0c807"

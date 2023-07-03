@@ -4,6 +4,7 @@ import { AppService } from './app.service'
 import { ShopifyCoreModule, ShopifyCspMiddleware } from '@nestjs-shopify/core'
 import { ApiVersion } from '@shopify/shopify-api'
 import { ConfigModule, ConfigService } from '@nestjs/config'
+import { ShopifyGraphqlProxyModule } from '@nestjs-shopify/graphql'
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
       },
       inject: [ConfigService],
     }),
+    ShopifyGraphqlProxyModule
   ],
   controllers: [AppController],
   providers: [AppService],
