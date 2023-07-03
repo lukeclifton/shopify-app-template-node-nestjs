@@ -20,7 +20,9 @@ import { PostgreSQLSessionStorage } from '@shopify/shopify-app-session-storage-p
         hostName: configService.get('HOST').replace(/https:\/\//, ''),
         isEmbeddedApp: true,
         scopes: configService.get('SHOPIFY_SCOPES').split(','),
-        sessionStorage: new PostgreSQLSessionStorage(configService.get('DATABSE_URL')),
+        sessionStorage: new PostgreSQLSessionStorage(
+          configService.get('DATABSE_URL'),
+        ),
       }),
       inject: [ConfigService, PostgreSQLSessionStorage],
     }),
