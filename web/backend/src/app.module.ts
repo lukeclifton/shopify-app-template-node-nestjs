@@ -1,18 +1,30 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
+import { ServeStaticModule } from '@nestjs/serve-static'
 import { ShopifyCoreModule, ShopifyCspMiddleware } from '@nestjs-shopify/core'
 import { ApiVersion } from '@shopify/shopify-api'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ShopifyGraphqlProxyModule } from '@nestjs-shopify/graphql'
 import { ShopifyAuthModule } from '@nestjs-shopify/auth'
-import { AfterAuthHandler } from './shopify/auth/auth-handlers/after-auth.handler'
 import { ShopifyWebhooksModule } from '@nestjs-shopify/webhooks'
-import { AppUninstalledWebhookHandler } from './shopify/webhooks/app-uninstalled.webhook-handler'
 import { PostgreSQLSessionStorage } from '@shopify/shopify-app-session-storage-postgresql'
+import { AppUninstalledWebhookHandler } from './shopify/webhooks/app-uninstalled.webhook-handler'
 import { AuthHandlerModule } from './shopify/auth/auth-handlers/auth-handers.module'
+import { AfterAuthHandler } from './shopify/auth/auth-handlers/after-auth.handler'
+import { PRODUCTION } from './common/consts'
+import { join } from 'path'
+
+const STATIC_PATH =
+  process.env.NODE_ENV === PRODUCTION
+    ? '/app/frontend'
+    : join(__dirname, '../../', 'frontend/dist')
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    ServeStaticModule.forRoot({
+      rootPath: STATIC_PATH,
+      exclude: ['/api*'],
+    }),
     ShopifyCoreModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -29,7 +41,7 @@ import { AuthHandlerModule } from './shopify/auth/auth-handlers/auth-handers.mod
       inject: [ConfigService],
     }),
     ShopifyWebhooksModule.forRoot({
-      path: '/shopify/webhooks',
+      path: '/api/shopify/webhooks',
     }),
     ShopifyAuthModule.forRootAsyncOnline({
       imports: [AuthHandlerModule],
