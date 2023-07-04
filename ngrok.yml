@@ -1,0 +1,12 @@
+region: eu
+version: 1
+authtoken: 1ppl5nHDD9vsHCqyeASnNtKaVXe_4PFdiacTZQ5dtenvkA2Dw
+tunnels:
+  backend:
+    proto: http
+    addr: 3000
+    hostname: propel-backend.eu.ngrok.io
+  frontend:
+    proto: http
+    addr: 5173
+    hostname: propel-frontend.eu.ngrok.io
