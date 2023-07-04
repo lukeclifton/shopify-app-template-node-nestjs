@@ -1,0 +1,12 @@
+region: eu
+version: 1
+authtoken: # ADD AUTH TOKEN HERE
+tunnels:
+  backend:
+    proto: http
+    addr: 3000
+    hostname: # ADD NGROK URL HERE
+  frontend:
+    proto: http
+    addr: 5173
+    hostname: # ADD NGROK URL HERE
