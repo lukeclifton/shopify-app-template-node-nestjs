@@ -4,6 +4,7 @@ import {
   ExceptionFilter,
   HttpException,
   HttpStatus,
+  Logger,
 } from '@nestjs/common'
 import { ErrorTypes } from 'src/common/enums'
 import { InvalidShopError } from '@shopify/shopify-api'
@@ -11,6 +12,8 @@ import { HttpAdapterHost } from '@nestjs/core'
 
 @Catch()
 export class AllExceptionFilter implements ExceptionFilter {
+  private readonly logger = new Logger(AllExceptionFilter.name)
+
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
   catch(exception: unknown, host: ArgumentsHost): void {
@@ -28,6 +31,8 @@ export class AllExceptionFilter implements ExceptionFilter {
       errorType = ErrorTypes.InvalidShopArugment
       message = exception.message
     }
+
+    this.logger.error(exception)
 
     const responseBody = {
       statusCode: httpStatus,

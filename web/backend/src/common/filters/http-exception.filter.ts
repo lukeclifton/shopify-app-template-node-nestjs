@@ -3,6 +3,7 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
+  Logger,
 } from '@nestjs/common'
 import { ErrorTypes } from 'src/common/enums'
 import { Response } from 'express'
@@ -10,6 +11,8 @@ import { HTTP_ERROR_TYPES } from '../consts'
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
+  private readonly logger = new Logger(HttpExceptionFilter.name)
+
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp()
     const response = ctx.getResponse<Response>()
@@ -26,6 +29,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     } else {
       errorType = HTTP_ERROR_TYPES[status]
     }
+
+    this.logger.error(exception)
 
     return response.status(status).json({
       statusCode: status,
