@@ -1,4 +1,5 @@
-export const HttpErrorType = {
+export const PRODUCTION = 'production'
+export const HTTP_ERROR_TYPES = {
   400: 'BAD_REQUEST',
   401: 'UNAUTHORIZED',
   402: 'PAYMENT_REQUIRED',

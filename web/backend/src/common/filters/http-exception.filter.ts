@@ -4,9 +4,9 @@ import {
   ExceptionFilter,
   HttpException,
 } from '@nestjs/common'
-import { HttpErrorType } from 'src/common/http-error-type'
 import { ErrorTypes } from 'src/common/enums'
 import { Response } from 'express'
+import { HTTP_ERROR_TYPES } from '../consts'
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -14,21 +14,23 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp()
     const response = ctx.getResponse<Response>()
     const status = +exception.getStatus()
+    let errorType
 
-    // eslint-disable-next-line prefer-const
-    let { errorType, message } = exception.getResponse() as {
+    const exceptionResponse = exception.getResponse() as {
       errorType: ErrorTypes | string
       message: string | string[]
     }
 
-    if (!errorType) {
-      errorType = HttpErrorType[status]
-      errorType = errorType ? errorType : 'UNEXPECTED_ERROR'
+    if (exceptionResponse.errorType) {
+      errorType = exceptionResponse.errorType
+    } else {
+      errorType = HTTP_ERROR_TYPES[status]
     }
 
     return response.status(status).json({
+      statusCode: status,
       errorType,
-      message,
+      message: exceptionResponse.message,
       timestamp: new Date().getTime(),
     })
   }
