@@ -1,3 +1,4 @@
 [submodule "web/frontend"]
 	path = web/frontend
 	url = https://github.com/lukeclifton/shopify-frontend-template-react-ts.git
+	branch = main

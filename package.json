@@ -1,7 +1,7 @@
 {
   "name": "my-node-app",
   "version": "1.0.0",
-  "main": "web/index.js",
+  "main": "web/backend/main.ts",
   "license": "UNLICENSED",
   "scripts": {
     "shopify": "shopify",
